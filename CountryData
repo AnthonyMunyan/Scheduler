@@ -1,0 +1,87 @@
+package Models;
+
+import Helper.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+/**
+ * SQL operations to filter Country data from database.
+ */
+public class CountryDatabase {
+
+    /** Gets a list of country objects
+     * @return ObservableList list of country objects
+     * @throws SQLException SQLException
+     */
+    public static ObservableList<Country> getCountries() throws SQLException {
+        ObservableList<Country> countries = FXCollections.observableArrayList();
+
+        String statement = "SELECT * FROM countries;";
+
+        DataBaseQuery.setPreparedStatement(JDBC.getConnection(), statement);
+        PreparedStatement preparedStatement = DataBaseQuery.getPreparedStatement();
+
+        try {
+            preparedStatement.execute();
+            ResultSet results = preparedStatement.getResultSet();
+
+
+            while (results.next()) {
+
+                Country newCountry = new Country(
+                        results.getInt("Country_ID"),
+                        results.getString("Country")
+                );
+
+                countries.add(newCountry);
+            }
+
+            return countries;
+        }
+
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /** Gets country data by Country Name
+     * @param country String Country Name
+     * @return country
+     * @throws SQLException SQLException
+     */
+    public static Country getCountryId(String country) throws SQLException {
+
+        String queryStatement = "SELECT * FROM countries WHERE Country=?";
+
+        DataBaseQuery.setPreparedStatement(JDBC.getConnection(), queryStatement);
+        PreparedStatement preparedStatement = DataBaseQuery.getPreparedStatement();
+
+        preparedStatement.setString(1, country);
+
+        try {
+            preparedStatement.execute();
+            ResultSet results = preparedStatement.getResultSet();
+
+            while (results.next()) {
+
+                Country newCountry = new Country(
+                        results.getInt("Country_ID"),
+                        results.getString("Country")
+                );
+
+                return newCountry;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return null;
+    }
+}
