@@ -1,4 +1,33 @@
-Civil Engineering Technician, Walling Engineering, Leesburg, FL                                            2004-2009
-•	Assisted in the design and engineering of large- and small-scale projects
-•	Created layout plans, grading plans, and drainage plans 
-•	Assured compliance to permitting and zoning entities’ regulations
+package Main;
+
+import Helper.JDBC;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class Main extends Application {
+
+    public void start(Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/views/Login.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main (String[] args){
+
+        JDBC.openConnection();
+        launch(args);
+
+        JDBC.closeConnection();
+    }
+}
