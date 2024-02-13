@@ -1,0 +1,73 @@
+package Models;
+
+/**Constructor for Division objects. */
+public class Division {
+
+    /** Division ID number */
+    private Integer divisionId;
+
+    /** Division */
+    private String division;
+
+    /** Country ID */
+    private Integer countryId;
+
+    /**Constructor for Division
+     * @param divisionId Integer Division ID
+     * @param division String Division Name
+     * @param countryId Integer Price
+     */
+    public Division (Integer divisionId, String division, Integer countryId) {
+
+        this.divisionId = divisionId;
+        this.division = division;
+        this.countryId = countryId;
+    }
+
+    /** Getter for Division ID
+     * @return divisionId
+     * */
+    public Integer getDivisionId() {
+
+        return divisionId;
+    }
+
+    /** Getter for Division
+     * @return division
+     * */
+    public String getDivision() {
+
+        return division;
+    }
+
+    /** Getter for Country ID
+     * @return countryId
+     * */
+    public Integer getCountryId() {
+
+        return countryId;
+    }
+
+    /** Setter for Division ID
+     * @param divisionId Integer Division ID
+     * */
+    public void setDivisionId(int divisionId) {
+
+        this.divisionId = divisionId;
+    }
+
+    /** Setter for Division
+     * @param division String Division
+     * */
+    public void setDivision(String division) {
+
+        this.division = division;
+    }
+
+    /** Setter for Country ID
+     * @param countryId Integer Country ID*/
+    public void setCountryId(int countryId) {
+
+        this.countryId = countryId;
+    }
+}
