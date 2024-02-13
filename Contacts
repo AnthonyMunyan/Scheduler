@@ -1,0 +1,73 @@
+package Models;
+
+/**Constructor used to create Contact objects and generate their values. */
+public class Contact {
+
+    /** Contact ID number */
+    private int contactId;
+
+    /** Contact name */
+    private String contactName;
+
+    /** Contact email address */
+    private String contactEmail;
+
+    /** Constructor for the contact object
+     * @param contactId Int value of Contact ID
+     * @param contactName String value of Contact Name
+     * @param contactEmail String value of Contact Email
+     */
+    public Contact (int contactId, String contactName, String contactEmail) {
+
+        this.contactId = contactId;
+        this.contactName = contactName;
+        this.contactEmail = contactEmail;
+    }
+    /** Getter for Contact ID
+     * @return contactId Integer Contact ID
+     * */
+    public int getContactId() {
+
+        return contactId;
+    }
+
+    /** Getter for Contact Name
+     * @return contactName String Contact Name
+     * */
+    public String getContactName() {
+
+        return contactName;
+    }
+
+    /** Getter for Contact Email
+     * @return contactEmail String Contact Email
+     * */
+    public String getContactEmail() {
+
+        return contactEmail;
+    }
+
+    /** Setter for Contact ID
+     * @param contactId Integer Contact ID
+     * */
+    public void setContactId(int contactId) {
+
+        this.contactId = contactId;
+    }
+
+    /** Setter for Contact Name
+     * @param contactName String Contact Name
+     * */
+    public void setContactName(String contactName) {
+
+        this.contactName = contactName;
+    }
+
+    /** Setter for Contact Email
+     * @param contactEmail String Contact Email
+     * */
+    public void setContactEmail(String contactEmail) {
+
+        this.contactEmail = contactEmail;
+    }
+}
