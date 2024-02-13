@@ -1,0 +1,79 @@
+package Models;
+
+import Helper.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * Class that handles SQl queries for users data
+ */
+public class UsersDatabase {
+
+    /** Checks the username and password
+     * @param username Username
+     * @param password Password
+     * @return Boolean Returns true if valid or false if not valid
+     * @throws SQLException SQLException
+     */
+    public static boolean checkUsernamePassword(String username, String password) throws SQLException {
+
+        String statement = "SELECT * FROM users WHERE User_Name=? AND Password=?";
+
+        DataBaseQuery.setPreparedStatement(JDBC.getConnection(), statement);
+        PreparedStatement preparedStatement = DataBaseQuery.getPreparedStatement();
+
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+
+        try {
+            preparedStatement.execute();
+            ResultSet results = preparedStatement.getResultSet();
+            return (results.next());
+        }
+
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /** Gets all Users from the User Collection
+     * @return ObservableList Returns Users
+     * @throws SQLException SQLException
+     */
+    public static ObservableList<User> getUsers() throws SQLException {
+
+        ObservableList<User> users = FXCollections.observableArrayList();
+
+        String statement = "SELECT * FROM users;";
+
+        DataBaseQuery.setPreparedStatement(JDBC.getConnection(), statement);
+        PreparedStatement preparedStatement = DataBaseQuery.getPreparedStatement();
+
+        try {
+            preparedStatement.execute();
+            ResultSet results = preparedStatement.getResultSet();
+
+            while (results.next()) {
+                User newUser = new User(
+                        results.getInt("User_ID"),
+                        results.getString("User_Name"),
+                        results.getString("Password")
+                );
+
+                users.add(newUser);
+            }
+
+            return users;
+        }
+
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
+}
